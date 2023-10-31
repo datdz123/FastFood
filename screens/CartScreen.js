@@ -62,7 +62,28 @@ export default function CartScreen() {
           })
         }
       </ScrollView>
-      <View style={{backgroundColor:themeColors.bgColor(0.2)}} className="p-6 px-8 rounded-full"></View>
+      <View style={{backgroundColor:themeColors.bgColor(0.2)}} className="p-6 px-8 rounded-full">
+        <View className="flex-row justify-between">
+            <Text className="text-gray-700">Subtotal</Text>
+            <Ti0ext className="text-gray-700">$20</Ti0ext>
+        </View>
+        <View className="flex-row justify-between">
+            <Text className="text-gray-700">Delivery Fee</Text>
+            <Text className="text-gray-700">$2</Text>
+        </View>
+        <View className="flex-row justify-between">
+            <Text className="text-gray-700">Order Total</Text>
+            <Text className="text-gray-700">$30</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={()=>navigation.navigate('OrderPrepairing')}
+          style={{backgroundColor:themeColors.bgColor(1)}} className="p-3 rounded-full">
+                  <Text className="text-white text center font-bold text-lg">
+                    Place Order
+                  </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   )
 }

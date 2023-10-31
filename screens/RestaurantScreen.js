@@ -50,8 +50,6 @@ export default function RestaurantScreen() {
                 }
             </View>
           </View>
-
-
         </View>
       </ScrollView>
     </View>
