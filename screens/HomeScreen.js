@@ -21,7 +21,7 @@ export default function HomeScreen() {
           <TextInput className="flex-1 ml-2" placeholder="Tìm kiếm " keyboardType='default' />
           <View className="flex-row items-center space-x-1  border-0 border-l-2 pl-2 borrder-1-gray-300">
             <Icon.MapPin height="25" width="25" stroke="gray" />
-            <Text className="text-gray-600">  VietNam , VN </Text>
+            <Text className="text-gray-600">  Vietnam , VN </Text>
           </View>
         </View>
 
