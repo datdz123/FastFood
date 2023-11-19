@@ -94,7 +94,7 @@ const slides = [
             <TouchableHighlight
               onPress={() => {
                 // Thực hiện định tuyến sang màn hình HomeScreen khi người dùng ấn nút "Done"
-                navigation.navigate('Home'); // Thay 'HomeScreen' bằng tên màn hình thật của bạn
+                navigation.navigate('Login'); // Thay 'HomeScreen' bằng tên màn hình thật của bạn
               }}
             >
               {buttonLabel("Done")}

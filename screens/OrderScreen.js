@@ -6,7 +6,7 @@ export default function OrderScreen() {
     const navigation=useNavigation();
     useEffect (()=>{
         setTimeout(()=>{
-            navigation.navigate('Delivery')
+            // navigation.navigate('Delivery')
         },3000)
     },[])
   return (
