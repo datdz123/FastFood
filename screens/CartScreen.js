@@ -36,7 +36,7 @@ export default function CartScreen({ item }) {
       <View className="relative py-4 shadow-sm">
         <TouchableOpacity onPress={() => navigation.goBack()} className="absolute z-10 rounded-full p-1 shadow top-10 left-2" style={{ backgroundColor: themeColors.bgColor(1) }}>
 
-          <Icon.ArrowLeft strokeWidth={3} stroke="white" />
+          {/* <Icon.ArrowLeft strokeWidth={3} stroke="white" /> */}
         </TouchableOpacity>
         <View>
           < Text className="text-center font-bold text-xl">
@@ -87,7 +87,7 @@ export default function CartScreen({ item }) {
                     <Icon.Minus stroke="white" h-20 w-20 strokeWidth={2}></Icon.Minus>
                   </TouchableOpacity>
                   {dish.price && (
-                    <Text className="font-bold"> $ {dish.price}</Text>
+                    <Text className="font-bold"> ${dish.price}</Text>
                   )}
                   <TouchableOpacity
                     onPress={() => dispatch(addToCart({ ...dish }))}
@@ -120,6 +120,7 @@ export default function CartScreen({ item }) {
         </View>
         <View>
           <TouchableOpacity
+            onPress={() => navigation.navigate('OrderScreen')}
             style={{ backgroundColor: themeColors.bgColor(1) }} className=" mt-2 p-2 rounded-full">
             <Text className="text-center font-bold text-white text-lg">
               Place Order

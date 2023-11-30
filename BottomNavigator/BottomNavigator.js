@@ -40,9 +40,6 @@ const Tab = createBottomTabNavigator();
         ),
       }}
       />
-    {/* <Tab.Screen name="OrderScreen" component={RestaurantScreen} /> */}
-    {/* <Tab.Screen name="Restaurant" component={RestaurantScreen} /> */}
-    {/* Add more screens as needed */}
   </Tab.Navigator>
   )
 }
