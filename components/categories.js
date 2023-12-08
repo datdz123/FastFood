@@ -1,9 +1,16 @@
 import { View, Text, Touchable, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { categories } from '../constants'
+import { getCategories } from '../api';
 
 export default function Categories() {
   const [activeCategory, setActiveCategory] = useState(null);
+    useEffect(()=>{
+        getCategories().then(data=>{
+           console.log(data);
+        })
+    },[])
+ 
   return (
     <View className="mt-4">
       <ScrollView
