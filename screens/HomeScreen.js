@@ -1,16 +1,32 @@
 import { View, StatusBar, TextInput, SafeAreaView, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Icon from "react-native-feather";
 import { themeColors } from '../theme';
 
 import Categories from '../components/categories'
 import FeaturedRow from '../components/featuredRow';
+
 import { featured } from '../constants';
-
-
+import { getCategories, getFeaturedResturants } from '../api';
 
 
 export default function HomeScreen() {
+  let [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+  useEffect(() => {
+    getFeaturedResturants().then(data => {
+      setFeaturedRestaurants(data);
+      console.log(data[0]);
+    });
+  }, []);
+
+  const [activeCategory, setActiveCategory] = useState(null);
+  let [categories, setCategories] = useState([]);
+  useEffect(() => {
+    getCategories().then(data => {
+      setCategories(data);
+      // console.log(data[0]);
+    });
+  }, []);
   return (
     // Khong bị che khuất 
 
@@ -38,11 +54,11 @@ export default function HomeScreen() {
         <Categories />
         <View className="mt-5">
 {
-             [featured,featured,featured].map((item,index)=>{
+              featuredRestaurants.map((item,index)=>{
               return (
               <FeaturedRow
               key={index}
-              title={item.title}
+              title={item.name}
               restaurants={item.restaurants}
               description={item.description}
 

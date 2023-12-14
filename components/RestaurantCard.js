@@ -3,12 +3,14 @@ import React from 'react'
 import * as Icon from "react-native-feather";
 import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
+import { urlFor } from '../sanity';
 
 export default function RestaurantCard({ item }) {
   const navigation=useNavigation();
 
   return (
     <TouchableNativeFeedback onPress={()=>navigation.navigate('Restaurant',{...item})}>
+      
       <View style ={{
           shadowColor:themeColors.bgColor(0.2),
           shadowRadius:7
@@ -16,9 +18,9 @@ export default function RestaurantCard({ item }) {
       }}
       className="mr-6 bg-white rounded-3xl shadow-lg ">
 
-        <Image className="h-36 w-64 rounded-t-3xl" source={item.image} />
+        {/* <Image className="h-36 w-64 rounded-t-3xl" source={{uri:urlFor(item.image).url()}} /> */}
         <View className="px-3 pb-5 space-y-2">
-          <Text className="font-bold text-lg pt-3 ">{item.name}</Text>
+          <Text className="font-bold text-lg pt-3 ">{item?.type?.name}</Text>
           <View className="flex-row items-center space-x-1">
             <Image source={require('../assets/images/fullStar.png')} style={{ width: 15, height: 15 }} />
             <Text className="text-xs">
