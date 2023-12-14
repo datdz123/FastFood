@@ -5,7 +5,7 @@ export const getFeaturedResturants = ()=>{
     return sanityQuery(`
         *[_type == 'featured'] {
             ...,
-            resturants[]->{
+            restaurants[]->{
             ...,
             type->{
                 name

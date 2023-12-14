@@ -5,7 +5,7 @@ const client = sanityClient({
     projectId: 'sz3q5ya8',
     dataset: 'production',
     useCdn: true,
-    apiVersion: '2023-08-12',
+    apiVersion: '2022-03-17',
 
 
 })

@@ -3,7 +3,7 @@ import React from 'react'
 import { themeColors } from '../theme'
 import RestaurantCard from './RestaurantCard'
 
-export default function FeaturedRow({title, description, restaurants}) {
+export default function FeaturedRow({id, title, description, resturants,restaurants}) {
   return (
     <View>
         <View className="flex-row justify-between items-center px-4 ">
@@ -20,11 +20,20 @@ export default function FeaturedRow({title, description, restaurants}) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{paddingHorizontal:15}} className="overflow-visible py-5">
             {
-                restaurants.map((restaurant,index) =>{
+                resturants.map(resturant =>{
+                    console.log(resturant._id);
                     return(
                         <RestaurantCard
-                        item={restaurant}
-                        key={index}></RestaurantCard>
+                        key={resturant._id}
+                        id={resturant._id}
+                        imgUrl={resturant.image}
+                        title={resturant.name}
+                        rating={resturant.rating}
+                        type={resturant.type?.name}
+                        address="123 main street"
+                        description={resturant.description}
+                        dishes={resturant.dishes}
+                        />
                     )
                 })
             }

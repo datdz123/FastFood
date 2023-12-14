@@ -1,5 +1,5 @@
 import { View, StatusBar, TextInput, SafeAreaView, Text, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import * as Icon from "react-native-feather";
 import { themeColors } from '../theme';
 
@@ -8,16 +8,22 @@ import FeaturedRow from '../components/featuredRow';
 
 import { featured } from '../constants';
 import { getCategories, getFeaturedResturants } from '../api';
+import { useNavigation } from '@react-navigation/core';
+
 
 
 export default function HomeScreen() {
-  let [featuredRestaurants, setFeaturedRestaurants] = useState([]);
-  useEffect(() => {
-    getFeaturedResturants().then(data => {
-      setFeaturedRestaurants(data);
-      console.log(data[0]);
-    });
-  }, []);
+  const [featuredCategories, setFeaturedCategories] = useState([])
+  const navigation = useNavigation();
+  useLayoutEffect(() => {
+    navigation.setOptions({headerShown: false})
+  }, [])
+  useEffect(()=>{
+      getFeaturedResturants().then(data=>{
+          setFeaturedCategories(data);
+          // console.log(data[0]);
+      })
+  },[])
 
   const [activeCategory, setActiveCategory] = useState(null);
   let [categories, setCategories] = useState([]);
@@ -54,13 +60,16 @@ export default function HomeScreen() {
         <Categories />
         <View className="mt-5">
 {
-              featuredRestaurants.map((item,index)=>{
+              featuredCategories?.map(category=>{
+                console.log(category?.restaurants);
               return (
               <FeaturedRow
-              key={index}
-              title={item.name}
-              restaurants={item.restaurants}
-              description={item.description}
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              resturants={category?.restaurants}
+              description={category.description}
+              featuredCategory={category._type}
 
               />
               )
