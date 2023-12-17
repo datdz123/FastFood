@@ -29,9 +29,8 @@ export default function RestaurantScreen() {
   const navigation = useNavigation();
   const dispatch= useDispatch();
   useEffect(()=>{
-    if(resturant && resturant.id!=id){
-        dispatch(emptyBasket());
-    }
+    if(resturant && resturant.id){
+      
     dispatch(setRestaurant({
         id, 
         title,
@@ -45,6 +44,7 @@ export default function RestaurantScreen() {
         reviews,
         lat
     }))
+}
 },[])
   return (
 

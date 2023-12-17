@@ -67,7 +67,7 @@ export default function Acount() {
       <TouchableOpacity onPress={handleCall}>
         <View style={styles.sectionTitle}>
           <Ionicons name="call-outline" size={30} color="#333" style={styles.icon} />
-          <Text style={[styles.sectionTitleText, { marginLeft: 10 }]}>Gọi lễ tân</Text>
+          <Text style={[styles.sectionTitleText, { marginLeft: 10 }]}>Liên Hệ</Text>
         </View>
       </TouchableOpacity>
 

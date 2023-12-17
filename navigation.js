@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={SignInScreen} />
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
@@ -26,6 +26,8 @@ export default function Navigation() {
         <Stack.Screen name="Home" component={BottomNavigator} />
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
         <Stack.Screen name="EditUser" component={EditUserInfoScreen} />
+        <Stack.Screen name="Delivery" component={DeliveryScreen} />
+
         <Stack.Screen
           name="Cart"
           options={{ presentation: 'modal' }}
