@@ -13,6 +13,7 @@ import SignInScreen from './screens/Login';
 import SignUpScreen from './screens/SignUp';
 import ForgotPwdScreen from './screens/forgotPass';
 import EditUserInfoScreen from './screens/Account/EditUser';
+import FavoriteProduct from './screens/Account/FavoriteProduct';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export default function Navigation() {
@@ -27,6 +28,7 @@ export default function Navigation() {
         <Stack.Screen name="Restaurant" component={RestaurantScreen} />
         <Stack.Screen name="EditUser" component={EditUserInfoScreen} />
         <Stack.Screen name="Delivery" component={DeliveryScreen} />
+        <Stack.Screen name="FavoriteProdcut" component={FavoriteProduct} />
 
         <Stack.Screen
           name="Cart"

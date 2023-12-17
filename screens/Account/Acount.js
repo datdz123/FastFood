@@ -57,7 +57,7 @@ export default function Acount() {
       </TouchableOpacity>
 
 
-      <TouchableOpacity onPress={() => { navigation.navigate('LoveDetail')}}>
+      <TouchableOpacity onPress={() => { navigation.navigate('FavoriteProdcut')}}>
         <View style={styles.sectionTitle} >
           <Ionicons name="heart" size={30} color="#333" style={styles.icon} />
           <Text style={[styles.sectionTitleText, { marginLeft: 10 }]}> Sản Phẩm Yêu Thích</Text>

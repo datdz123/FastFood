@@ -10,6 +10,7 @@ import { addToCart, removeFromCart, selectCartItems, selectCartItemsById, select
 import { urlFor } from '../sanity';
 
 export default function CartScreen({ item }) {
+  const [prePaymentCart, setPrePaymentCart] = useState([]);
   const restaurant = useSelector(selectRestaurant);
   const navigation = useNavigation();
   const cartItems = useSelector(selectCartItems);
@@ -27,6 +28,7 @@ export default function CartScreen({ item }) {
       }
       return group;
     }, {})
+    
     setGroupedItems(items);
   }, [cartItems])
 

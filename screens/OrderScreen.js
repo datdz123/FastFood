@@ -12,6 +12,11 @@ export default function OrderScreen({ route }) {
 
   useEffect(() => {
     setTimeout(() => {
+
+
+  // Thêm đơn hàng vào lịch sử mua hàng
+  addToOrderHistory(order);
+
       Alert.alert(
         '',
         'Thanh toán thành công.\n Đơn hàng đang vận chuyển',
