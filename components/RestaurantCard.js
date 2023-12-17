@@ -19,7 +19,7 @@ export default function RestaurantCard({  id,
 
   return (
     <TouchableNativeFeedback onPress={()=>navigation.navigate('Restaurant',{
-       id, 
+      id, 
       title,
       imgUrl,
       rating,

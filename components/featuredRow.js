@@ -21,7 +21,7 @@ export default function FeaturedRow({id, title, description, resturants,restaura
         contentContainerStyle={{paddingHorizontal:15}} className="overflow-visible py-5">
             {
                 resturants.map(resturant =>{
-                    console.log(resturant._id);
+                    // console.log(resturant._id);
                     return(
                         <RestaurantCard
                         key={resturant._id}
@@ -30,7 +30,7 @@ export default function FeaturedRow({id, title, description, resturants,restaura
                         title={resturant.name}
                         rating={resturant.rating}
                         type={resturant.type?.name}
-                        address="123 main street"
+                        address={resturant.address}
                         description={resturant.description}
                         dishes={resturant.dishes}
                         />

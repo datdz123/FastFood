@@ -4,20 +4,21 @@ import { themeColors } from '../theme'
 import * as Icon from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, selectCartItemsById } from '../slice/cartSlice';
+import { urlFor } from '../sanity';
 
 export default function DishRow({ item }) {
-    const totalIems=useSelector(state=>selectCartItemsById(state,item.id));
+    const totalIems=useSelector(state=>selectCartItemsById(state,item._id));
     const dispatch = useDispatch();
     const handleIncrease = () => {
             dispatch(addToCart({ ...item }))
     }   
     const handleDecrese = () => {  
-        dispatch(removeFromCart({ id: item.id }))
+        dispatch(removeFromCart({ id: item._id }))
     }
     
     return (
         <View className="flex-row items-center bg-white p-3 rounded-3xl shadow-2xl mb-3 mx-2">
-            <Image className="rounded-3xl h-[120px] w-[120px]" source={item.image} />
+            <Image className="rounded-3xl h-[120px] w-[120px]" source={{uri:urlFor(item.image).url()}} />
             <View className="flex flex-1 space-y-3">
                 <View className="pl-3">
                     <Text className="text-xl">{item.name}</Text>

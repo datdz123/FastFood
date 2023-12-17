@@ -7,6 +7,7 @@ import { featured } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurant } from '../slice/restaurantSlice';
 import { addToCart, removeFromCart, selectCartItems, selectCartItemsById, selectCartTotal } from '../slice/cartSlice';
+import { urlFor } from '../sanity';
 
 export default function CartScreen({ item }) {
   const restaurant = useSelector(selectRestaurant);
@@ -36,7 +37,7 @@ export default function CartScreen({ item }) {
       <View className="relative py-4 shadow-sm">
         <TouchableOpacity onPress={() => navigation.goBack()} className="absolute z-10 rounded-full p-1 shadow top-10 left-2" style={{ backgroundColor: themeColors.bgColor(1) }}>
 
-          {/* <Icon.ArrowLeft strokeWidth={3} stroke="white" /> */}
+          <Icon.ArrowLeft strokeWidth={3} stroke="white" />
         </TouchableOpacity>
         <View>
           < Text className="text-center font-bold text-xl">
@@ -74,14 +75,14 @@ export default function CartScreen({ item }) {
                   </Text>
                   {/* <Image className="h-14 w-14 rounded-full" source={dish.image} /> */}
                   {dish.image && (
-                    <Image className="h-14 w-14 rounded-full" source={dish.image} />
+                    <Image className="h-14 w-14 rounded-full" source={{uri:urlFor(dish.image).url()}} />
                   )}
                   {dish.name && (
                     <Text className="flex-1"> {dish.name}</Text>
                   )}
 
                   <TouchableOpacity
-                    onPress={() => dispatch(removeFromCart({ id: dish.id }))}
+                    onPress={() => dispatch(removeFromCart({ id: dish._id }))}
                     className="p-1 rounded-full"
                     style={{ backgroundColor: themeColors.bgColor(1) }}>
                     <Icon.Minus stroke="white" h-20 w-20 strokeWidth={2}></Icon.Minus>

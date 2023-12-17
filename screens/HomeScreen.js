@@ -35,7 +35,7 @@ export default function HomeScreen() {
   }, []);
   return (
     // Khong bị che khuất 
-
+    <ScrollView>
     <SafeAreaView className="bg-white">
       <View className="flex-row items-center space-x-2 px-4 pb-2 ">
         <View className="flex-row flex-1 items-center p-3 rounded-full border border-gray-300 mt-5 mb-5 ">
@@ -83,5 +83,6 @@ export default function HomeScreen() {
 
 
     </SafeAreaView>
+    </ScrollView>
   )
 }
