@@ -1,111 +1,87 @@
-
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import * as Icon from "react-native-feather";
-import { useNavigation } from '@react-navigation/native';
-import { themeColors } from '../../theme';
-import { featured } from '../../constants';
+import { View, Text, Image, ScrollView } from 'react-native'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectRestaurant } from '../../slice/restaurantSlice';
-import { addToCart, removeFromCart, selectCartItems, selectCartItemsById, selectCartTotal } from '../../slice/cartSlice';
+import { selectRestaurant, setRestaurant } from '../../slice/restaurantSlice';
+import * as Icon from "react-native-feather";
+
+import { themeColors } from '../../theme';
 import { urlFor } from '../../sanity';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function FavoriteProduct({ item }) {
-  const [prePaymentCart, setPrePaymentCart] = useState([]);
-  const restaurant = useSelector(selectRestaurant);
+export default function FavoriteProduct() {
+  const dispatch= useDispatch();
+  const resturant = useSelector(selectRestaurant);
   const navigation = useNavigation();
-  const [copiedCartItems, setCopiedCartItems] = useState([]); // Biến mới để lưu trữ sao chép của giỏ hàng
-
-  const cartItems = useSelector(selectCartItems);
-  const cartTotal = useSelector(selectCartTotal);
-  const [groupedItems, setGroupedItems] = useState({});
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const items = cartItems.reduce((group, item) => {
-      if (group[item.id]) {
-        group[item.id].push(item);
-
-      }
-      else {
-        group[item.id] = [item];
-      }
-      return group;
-    }, {})
-    
-    setGroupedItems(items);
-    setCopiedCartItems([...cartItems]);
-
-  }, [cartItems])
 
 
+
+// console.log( favoriteRestaurant.title );
+const {params: {
+  id, 
+  title,
+  imgUrl,
+  rating,
+  type,
+  address, 
+  description,
+  dishes,
+  lng,
+  reviews,
+  lat
+}} = useRoute();
+useEffect(()=>{
+  if(resturant && resturant.id){
+  dispatch(setRestaurant({
+      id, 
+      title,
+      imgUrl,
+      rating,
+      type,
+      address, 
+      description,
+      dishes,
+      lng,
+      reviews,
+      lat
+  }))
+}
+},[])
+console.log({title});
   return (
-
-    <View className="bg-white flex-1 ">
-      <View className="relative py-4 shadow-sm">
-        <TouchableOpacity onPress={() => navigation.goBack()} className="absolute z-10 rounded-full p-1 shadow top-10 left-2" style={{ backgroundColor: themeColors.bgColor(1) }}>
-
-          <Icon.ArrowLeft strokeWidth={3} stroke="white" />
-        </TouchableOpacity>
-        <View>
-          < Text className="text-center font-bold text-xl mt-5">
-            Lịch Sử mua hàng 
-          </Text>
-          <Text className="text-center text-gray-500">
-            {restaurant ? restaurant.name : ''}
-          </Text>
-
+    <View>
+  <ScrollView>
+        <View style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
+          className="bg-white -mt-12 pt-6">
+             <View className="relative">
+             <TouchableOpacity onPress={() => navigation.goBack()}
+            className=" absolute top-14 left-4 bg-gray-50 p-2 rounded-full shadow">
+            <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.bgColor(1)} />
+          </TouchableOpacity>
         </View>
-      </View>
-      
-
-      <ScrollView
-        showsVerticalScrollIndicator
-        contentContainerStyle={{ paddingBottom: 50 }}
-        className="bg-white pt-5">
-
-        {
-         Object.entries(groupedItems).map(([key]) => {
-          let dish = copiedCartItems.find(item => item.id === key);
-            if (dish) {
-              return (
-                <View key={key} className="  shadow flex-row items-center space-x-3 py-2 px-4 bg-white rounded-full my-3">
-                  <Text className="font-bold" style={{ color: themeColors.text }}>
-                  {copiedCartItems.filter(item => item.id === key).length} x
-                  </Text>
-                  {/* <Image className="h-14 w-14 rounded-full" source={dish.image} /> */}
-                  {dish.image && (
-                    <Image className="h-14 w-14 rounded-full" source={{uri:urlFor(dish.image).url()}} />
-                  )}
-                  {dish.name && (
-                    <Text className="flex-1"> {dish.name}</Text>
-                  )}
-
-                  <TouchableOpacity
-                    onPress={() => dispatch(removeFromCart({ id: dish._id }))}
-                    className="p-1 rounded-full"
-                    style={{ backgroundColor: themeColors.bgColor(1) }}>
-                    <Icon.Minus stroke="white" h-20 w-20 strokeWidth={2}></Icon.Minus>
-                  </TouchableOpacity>
-                  {dish.price && (
-                    <Text className="font-bold"> ${dish.price}</Text>
-                  )}
-                  <TouchableOpacity
-                    onPress={() => dispatch(addToCart({ ...dish }))}
-                    className="p-1 rounded-full"
-                    style={{ backgroundColor: themeColors.bgColor(1) }}>
-                    <Icon.Plus stroke="white" h-20 w-20 strokeWidth={2}></Icon.Plus>
-                  </TouchableOpacity>
-                </View>
-
-              )
-            }
-            else {
-              return null;
-            }
-          })
-        }
-      </ScrollView>
-   
-    </View>
+          <View className="px-5">
+          <Text className="text-3xl font-bold mt-36 text-center">Nhà Hàng Yêu Thích</Text>
+          <Image className="w-full h-72" source={{uri: urlFor(imgUrl).url()}} />
+            <Text className="text-3xl font-bold">{title}</Text>
+            <View className="flex-row space-x-2 my-1">
+              <View className="flex-row items-center space-x-1">
+                <Image source={require('../../assets/images/fullStar.png')} style={{ width: 15, height: 15 }} />
+                <Text className="text-xs">
+                  {rating}
+                </Text>
+                <Text className="text-gray-700">
+                  ({reviews} reviews) .
+                  <Text className="font-semibold">{type}</Text>
+                </Text>
+              </View>
+              <View className="flex-row items-center space-x-1">
+                <Icon.MapPin height="15" width="15" stroke="gray" />
+                <Text className="text-gray-700 text-xs ">Nearby. {address}</Text>
+              </View>
+            </View>
+            </View>
+            </View>
+            </ScrollView>
+        </View>
   )
 }

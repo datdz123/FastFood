@@ -15,7 +15,7 @@ export default function OrderScreen({ route }) {
 
 
   // Thêm đơn hàng vào lịch sử mua hàng
-  addToOrderHistory(order);
+  // addToOrderHistory(order);
 
       Alert.alert(
         '',

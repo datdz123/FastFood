@@ -61,7 +61,7 @@ export default function HomeScreen() {
         <View className="mt-5">
 {
               featuredCategories?.map(category=>{
-                console.log(category?.restaurants);
+                // console.log(category?.restaurants);
               return (
               <FeaturedRow
               key={category._id}

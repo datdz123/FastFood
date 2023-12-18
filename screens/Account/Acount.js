@@ -25,7 +25,7 @@ export default function Acount() {
   };
   const navigation = useNavigation();
   const handleCall = () => {
-    const phoneNumber = '19005000';
+    const phoneNumber = '0344585983';
     Linking.openURL(`tel:${phoneNumber}`);
   };
   return (

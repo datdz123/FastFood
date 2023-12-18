@@ -38,6 +38,8 @@ export default function RestaurantCard({  id,
       className="mr-6 bg-white rounded-3xl shadow-lg ">
 
         <Image className="h-36 w-64 rounded-t-3xl" source={{uri:urlFor(imgUrl).url()}} />
+       
+ 
         <View className="px-3 pb-5 space-y-2">
           <Text className="font-bold text-lg pt-3 ">{title}</Text>
           <View className="flex-row items-center space-x-1">

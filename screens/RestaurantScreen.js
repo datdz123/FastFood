@@ -8,8 +8,12 @@ import Carticon from '../components/carticon';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurant, setRestaurant } from '../slice/restaurantSlice';
 import { urlFor } from '../sanity';
+import { Pressable } from 'react-native';
 export default function RestaurantScreen() {
+  const navigation = useNavigation();
+  const dispatch= useDispatch();
   const resturant = useSelector(selectRestaurant);
+  
   const {params: {
     id, 
     title,
@@ -25,12 +29,13 @@ export default function RestaurantScreen() {
 }} = useRoute();
 
 
+  const handleAddToFavorites = (restaurantInfo) => {
+    dispatch(setRestaurant(restaurantInfo));
+    console.log({restaurantInfo});
+  };
 
-  const navigation = useNavigation();
-  const dispatch= useDispatch();
   useEffect(()=>{
     if(resturant && resturant.id){
-      
     dispatch(setRestaurant({
         id, 
         title,
@@ -46,6 +51,9 @@ export default function RestaurantScreen() {
     }))
 }
 },[])
+
+
+
   return (
 
     <View>
@@ -56,9 +64,7 @@ export default function RestaurantScreen() {
           <TouchableOpacity onPress={() => navigation.goBack()}
             className=" absolute top-14 left-4 bg-gray-50 p-2 rounded-full shadow">
             <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.bgColor(1)} />
-
           </TouchableOpacity>
-
         </View>
         <View style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
           className="bg-white -mt-12 pt-6">
@@ -75,13 +81,45 @@ export default function RestaurantScreen() {
                   <Text className="font-semibold">{type}</Text>
                 </Text>
               </View>
+              <TouchableOpacity
+  style={styles.heartButton}
+  onPress={()=>navigation.navigate('FavoriteProduct',{
+    id, 
+    title,
+    imgUrl,
+    rating,
+    type,
+    address, 
+    description,
+    dishes,
+    reviews,
+    })}
+  // onPress={() => handleAddToFavorites
+  //   ({
+  //   id, 
+  //   title,
+  //   imgUrl,
+  //   rating,
+  //   type,
+  //   address, 
+  //   description,
+  //   dishes,
+  //   lng,
+  //   reviews,
+  //   lat
+  // })}
+>
+  <Image source={require('../assets/images/icons/heart.png')} />
+</TouchableOpacity>
               <View className="flex-row items-center space-x-1">
                 <Icon.MapPin height="15" width="15" stroke="gray" />
                 <Text className="text-gray-700 text-xs ">Nearby. {address}</Text>
               </View>
             </View>
+            
             <View className="pb-36 bg-white">
-         
+
+           
 
                 <Text className="px-4 py-4 text-2xl font-bold ">Menu</Text>
                
@@ -95,3 +133,24 @@ export default function RestaurantScreen() {
     </View>
   )
 }
+const styles = StyleSheet.create({
+  heartButton: {
+    width: 35,
+    height: 35,
+    borderRadius: 35,
+    position: 'absolute',
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 20,
+    bottom: 20,
+    top:-45,
+    // shadowColor: Colors.main,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+  },
+});
